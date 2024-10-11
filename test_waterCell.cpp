@@ -1,7 +1,11 @@
 #include <cassert>
+#include <stdexcept>
+#include <string>
 
 #include "params.h"
 #include "waterCell.h"
+
+
 
 void test_WaterCell() {
     WaterCell w1(1, 2, 3, 4, 5);
@@ -18,6 +22,11 @@ void test_WaterCell() {
     assert(w1['v'] == 7);
     assert(w1['p'] == 8);
 
+    assert(w1.get_x() == 1);
+    assert(w1.get_y() == 2);
+    assert(w1.get_u() == 6);
+    assert(w1.get_v() == 7);
+    assert(w1.get_p() == 8);
 
 }
 
