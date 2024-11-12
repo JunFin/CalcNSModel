@@ -4,10 +4,7 @@
 #include <stdexcept>
 
 
-WaterCell::WaterCell(int x, int y, float u, float v, float p) {
-    if (x < 0 || x >= GridSize || y < 0 || y >= GridSize) {
-        throw std::invalid_argument("Invalid coordinates");
-    }
+WaterCell::WaterCell(int x, int y, float u, float v, float p):Cell(x, y) {
     this->x = x;
     this->y = y;
     this->u = u;

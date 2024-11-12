@@ -28,6 +28,35 @@ void test_WaterCell() {
     assert(w1.get_v() == 7);
     assert(w1.get_p() == 8);
 
+    try {
+        WaterCell w2(-1, 2, 3, 4, 5);
+        assert(false);
+    } catch (std::invalid_argument& e) {
+        assert(std::string(e.what()).find("Invalid coordinates") != std::string::npos);
+    }
+
+    try {
+        WaterCell w3(1, -2, 3, 4, 5);
+        assert(false);
+    } catch (std::invalid_argument& e) {
+        assert(std::string(e.what()).find("Invalid coordinates") != std::string::npos);
+    }
+
+    try {
+        WaterCell w4(-1, -2, 3, 4, 5);
+        assert(false);
+    } catch (std::invalid_argument& e) {
+        assert(std::string(e.what()).find("Invalid coordinates") != std::string::npos);
+    }
+
+    try {
+        WaterCell w5(1, 2, 3, 4, -5);
+        assert(false);
+    } catch (std::invalid_argument& e) {
+        assert(std::string(e.what()).find("Invalid pressure") != std::string::npos);
+    }
+
+
 }
 
 int main() {

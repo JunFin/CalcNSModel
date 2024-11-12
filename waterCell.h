@@ -1,7 +1,9 @@
 #ifndef PROJECT_WATERCELL_H_
 #define PROJECT_WATERCELL_H_
 
-class WaterCell{
+#include "cell.h"
+
+class WaterCell: public Cell {
     private:
         int x; // x coordinate in the grid
         int y; // y coordinate in the grid
