@@ -1,0 +1,6 @@
+#ifndef PROJECT_TEST_WATERCELL_H_
+#define PROJECT_TEST_WATERCELL_H_
+
+void test_WaterCell();
+
+#endif //PROJECT_TEST_WATERCELL_H_

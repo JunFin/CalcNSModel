@@ -1,0 +1,6 @@
+#ifndef PROJECT_TEST_MOVINGWALLCELL_H_
+#define PROJECT_TEST_MOVINGWALLCELL_H_
+
+void test_MovingWallCell();
+
+#endif //PROJECT_TEST_MOVINGWALLCELL_H_

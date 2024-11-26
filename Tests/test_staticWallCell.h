@@ -1,0 +1,6 @@
+#ifndef PROJECT_TEST_STATICWALLCELL_H_
+#define PROJECT_TEST_STATICWALLCELL_H_
+
+void test_StaticWallCell();
+
+#endif //PROJECT_TEST_STATICWALLCELL_H_
