@@ -1,12 +1,15 @@
-#ifndef PROJECT_MOVINGWALLCELL_H_
-#define PROJECT_MOVINGWALLCELL_H_
+#ifndef CALCNSMODEL_MOVINGWALLCELL_H_
+#define CALCNSMODEL_MOVINGWALLCELL_H_
 
 #include "wallCell.h"
+
+#include <string>
 
 class MovingWallCell: public WallCell {
     private:
         float u; // x velocity
         float v; // y velocity
+        std::string type;
     public:
         MovingWallCell(int x, int y, float u, float v); // constructor
         
@@ -17,4 +20,4 @@ class MovingWallCell: public WallCell {
         float get_v(); // returns the y velocity
 };
 
-#endif //PROJECT_MOVINGWALLCELL_H_
+#endif //CALCNSMODEL_MOVINGWALLCELL_H_

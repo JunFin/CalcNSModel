@@ -1,2 +1,4 @@
-test:
-	g++ -Wall -Wextra Classes/cell.cpp Classes/waterCell.cpp Classes/wallCell.cpp Classes/staticWallCell.cpp Classes/movingWallCell.cpp Tests/test_waterCell.cpp Tests/test_staticWallCell.cpp Tests/test_movingWallCell.cpp Tests/test.cpp -o test
+clean:
+	rm -f *.o main
+main *.h, *.cpp:
+	g++ -v -Wall -Wextra ../Classes/cell.cpp ../Classes/waterCell.cpp ../Classes/wallCell.cpp ../Classes/staticWallCell.cpp ../Classes/movingWallCell.cpp ../Classes/field.cpp main.cpp -o main

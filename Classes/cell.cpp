@@ -1,5 +1,6 @@
 #include "cell.h"
 #include "../Settings/params.h"
+
 #include <stdexcept>
 
 
@@ -9,6 +10,7 @@ Cell::Cell(int x, int y) {
     }
     this->x = x;
     this->y = y;
+    this->type = "None";
 }
 
 float Cell::operator[](char c) const {
@@ -25,4 +27,8 @@ int Cell::get_x() const {
 
 int Cell::get_y() const {
     return y;
+}
+
+std::string Cell::get_description() const {
+    return "Cell at (" + std::to_string(x) + ", " + std::to_string(y) + ") " + "with type: " + type;
 }

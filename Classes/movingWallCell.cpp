@@ -7,6 +7,7 @@
 MovingWallCell::MovingWallCell(int x, int y, float u, float v):WallCell(x, y) {
     this->u = u;
     this->v = v;
+    this->type = "MovingWall";
 }
 
 

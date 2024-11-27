@@ -2,16 +2,17 @@
 #include "../Settings/params.h"
 
 #include <stdexcept>
+#include <string>
 
 
 WaterCell::WaterCell(int x, int y, float u, float v, float p):Cell(x, y) {
     this->u = u;
     this->v = v;
-
     if (p < 0) {
         throw std::invalid_argument("Invalid pressure");
     }
     this->p = p;
+    this->type = "Water";
 }
 
 float& WaterCell::operator[](char c) {

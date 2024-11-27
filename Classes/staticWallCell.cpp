@@ -4,5 +4,7 @@
 #include <stdexcept>
 
 
-StaticWallCell::StaticWallCell(int x, int y):WallCell(x, y) {}
+StaticWallCell::StaticWallCell(int x, int y):WallCell(x, y) {
+    this->type = "StaticWall";
+}
 

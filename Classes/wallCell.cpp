@@ -4,7 +4,9 @@
 #include <stdexcept>
 
 
-WallCell::WallCell(int x, int y):Cell(x, y) {}
+WallCell::WallCell(int x, int y):Cell(x, y) {
+    this->type = "NoneWall";
+}
 
 float WallCell::operator[](char c) const {
     switch (c) {
