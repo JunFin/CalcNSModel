@@ -3,11 +3,13 @@
 
 #include <stdexcept>
 
+#include <iostream>
+
 
 MovingWallCell::MovingWallCell(int x, int y, float u, float v):WallCell(x, y) {
     this->u = u;
     this->v = v;
-    this->type = "MovingWall";
+    set_type("MovingWall");
 }
 
 
@@ -37,4 +39,16 @@ float MovingWallCell::get_u() {
 
 float MovingWallCell::get_v() {
     return v;
+}
+
+void MovingWallCell::set_u(float u) {
+    this->u = u;
+}
+
+void MovingWallCell::set_v(float v) {
+    this->v = v;
+}
+
+std::string MovingWallCell::get_description() const {
+    return "M";
 }

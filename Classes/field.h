@@ -21,6 +21,7 @@ class Field {
         Cell* get_cell(int x, int y);  // get the value of a cell at position (x, y)
 
         void display();  // display the field
+        void display_test();  // display the field for test with full description of cells
         void update();  // update the field
 };
 

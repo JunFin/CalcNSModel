@@ -5,6 +5,6 @@
 
 
 StaticWallCell::StaticWallCell(int x, int y):WallCell(x, y) {
-    this->type = "StaticWall";
+    this->set_type("StaticWall");
 }
 

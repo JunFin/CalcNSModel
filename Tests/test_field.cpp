@@ -15,10 +15,12 @@ void test_Field() {
 
     for (int x = 0; x < field.get_xSize(); x++) {
         for (int y = 0; y < field.get_ySize(); y++) {
-            assert(field.get_cell(x, y).get_x() == x);
-            assert(field.get_cell(x, y).get_y() == y);
+            assert(field.get_cell(x, y)->get_x() == x);
+            assert(field.get_cell(x, y)->get_y() == y);
         }
     }
 
-    field.display();
+    field.display_test();
 }
+
+

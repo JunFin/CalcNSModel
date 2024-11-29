@@ -9,26 +9,32 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
+#include <unistd.h>
+#include <thread>
+#include <chrono>
 
-void initialize_field(Field* field);
+void initialize_field(Field* field);  // Вопрос, где реализовывать эту функцию: в main.cpp или в field.cpp?
 
 void initialize_field(Field* field) {
     std::ifstream file(FileName);
     if (!file.is_open()) {
         throw std::runtime_error("Failed to open file: " + std::string(FileName));
     }
-    for (int x = 0; x < GridSize; x++) {
-        for (int y = 0; y < GridSize; y++) {
+    for (int y = 0; y < GridSize; y++) {
+        for (int x = 0; x < GridSize; x++) {
             char c = file.get();
-            if (!file) {
-                throw std::runtime_error("Failed to read file: " + std::string(FileName));
+            if (file.eof()) {
+                break;
             }
-            std::cout << c;
+            if (!file) {
+                throw std::runtime_error("Failed to read file: " + std::string(FileName) + " or file is wrong");
+            }
             switch (c) {
                 case 's': field->set_cell(x, y, new StaticWallCell(x, y)); break;
-                case 'm': field->set_cell(x, y, new MovingWallCell(x, y, 0, 0)); break;
+                case 'm': field->set_cell(x, y, new MovingWallCell(x, y, 1, 0)); break;
                 case 'w': field->set_cell(x, y, new WaterCell(x, y, 0, 0, 0));  break;
-                default: throw std::runtime_error("Unknown cell type: " + std::string(1, c));   
+                case '\n': x--; break;
+                default: throw std::runtime_error("Invalid character in file: " + std::string(FileName));
             }
         }
     }
@@ -36,9 +42,22 @@ void initialize_field(Field* field) {
 
 
 int main() {
-    std::cout << "Field creating" << std::endl;
-    Field field(GridSize, GridSize);
-    std::cout << "Field initializing" << std::endl;
-    initialize_field(&field);
-    field.display();
+    try {
+        std::cout << "Field creating" << std::endl;
+        Field field(GridSize, GridSize);
+        std::cout << "Field initializing" << std::endl;
+        initialize_field(&field);
+        std::cout << "Field displaying" << std::endl;
+        field.display();
+        for (int t = 0; t < TimeOfSimulation; t++) {
+            std::cout << "\033[2J\033[1;1H";
+            field.update();
+            field.display();
+            std::this_thread::sleep_for(std::chrono::milliseconds(TimeStep));
+        }
+        return 0;
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Runtime error catched: " << e.what() << std::endl;
+    }
+    
 }

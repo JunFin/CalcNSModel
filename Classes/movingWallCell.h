@@ -18,6 +18,11 @@ class MovingWallCell: public WallCell {
 
         float get_u(); // returns the x velocity
         float get_v(); // returns the y velocity
+
+        void set_u(float u); // sets the x velocity
+        void set_v(float v); // sets the y velocity
+
+        std::string get_description() const override;
 };
 
 #endif //CALCNSMODEL_MOVINGWALLCELL_H_

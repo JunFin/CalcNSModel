@@ -19,6 +19,12 @@ class WaterCell: public Cell {
         float get_u(); // returns the x velocity
         float get_v(); // returns the y velocity
         float get_p(); // returns the pressure
+
+        void set_u(float u); // sets the x velocity
+        void set_v(float v); // sets the y velocity
+        void set_p(float p); // sets the pressure
+
+        std::string get_description() const override;
 };
 
 #endif //CALCNSMODEL_WATERCELL_H_

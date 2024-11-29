@@ -10,12 +10,18 @@ class Cell {
         int y; // y coordinate in the grid
         std::string type;
     public:
-        Cell(int x, int y);
+        Cell(int x, int y);  // constructor
+        virtual ~Cell();  // destructor
         int get_x() const; // returns the x coordinate
         int get_y() const; // returns the y coordinate
         float operator[](char c) const;
 
-        std::string get_description() const;
+        std::string get_type() const;  // returns the type of the cell
+
+        virtual std::string get_description() const;  // returns the description of the cell
+        std::string get_description_test() const;  // returns the description of the cell for test with full information
+    protected:
+        void set_type(std::string type);
 };
 
 
