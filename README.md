@@ -1,29 +1,22 @@
-To run the program run:
-
+To build the project:
 ```bash
 make main
 ```
 
-To recompile the program run:
-
+To rerebuild the project:
 ```bash
 make clean
 make main
 ```
 
-To test classes run:
+To run the project:
+```bash
+./main
+```
 
+To make tests:
 ```bash
 cd Tests
 make test
+./test
 ```
-
-if all tests passed you should see `All tests passed`
-
-To recompile everything run:
-
-```bash
-make clean
-make test
-```
-
