@@ -3,6 +3,7 @@
 
 #include "cell.h"
 #include <string>
+#include <memory>
 
 class WaterCell: public Cell {
     private:
@@ -25,6 +26,7 @@ class WaterCell: public Cell {
         void set_p(float p); // sets the pressure
 
         std::string get_description() const override;
+        std::unique_ptr<Cell> copy() const override;
 };
 
 #endif //CALCNSMODEL_WATERCELL_H_

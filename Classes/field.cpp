@@ -7,6 +7,7 @@
 #include <vector>
 #include <stdexcept>
 #include <iostream>
+#include <memory>
 
 
 Field::Field(int xSize, int ySize) {
@@ -16,20 +17,31 @@ Field::Field(int xSize, int ySize) {
 
     this->xSize = xSize;
     this->ySize = ySize;
-    this->field = std::vector<std::vector<Cell*> >(xSize, std::vector<Cell*>(ySize));
+    this->field = std::vector<std::vector<std::unique_ptr<Cell>>>(xSize);
     for (int x = 0; x < xSize; x++) {
+        this->field[x] = std::vector<std::unique_ptr<Cell>>(ySize);
         for (int y = 0; y < ySize; y++) {
-            set_cell(x, y, new Cell(x, y));
+            set_cell(x, y, std::make_unique<Cell>(x, y));
         }
     }
 }
 
-Field::~Field() {
-    for (int x = 0; x < xSize; x++) {
-        for (int y = 0; y < ySize; y++) {
-            delete field[x][y];
-        }
+Field::Field(Field&& other) noexcept  // move constructor
+    : xSize(other.xSize), ySize(other.ySize), field(std::move(other.field)) {
+    other.xSize = 0;
+    other.ySize = 0;
+}
+
+Field& Field::operator=(Field&& other) noexcept {  // move assignment
+    if (this != &other) {
+        xSize = other.xSize;
+        ySize = other.ySize;
+        field = std::move(other.field);
+
+        other.xSize = 0;
+        other.ySize = 0;
     }
+    return *this;
 }
 
 int Field::get_xSize() const {
@@ -40,18 +52,18 @@ int Field::get_ySize() const {
     return ySize;
 }
 
-void Field::set_cell(int x, int y, Cell* cell) {
+void Field::set_cell(int x, int y, std::unique_ptr<Cell> cell) {
     if (x < 0 || x >= xSize || y < 0 || y >= ySize) {
         throw std::invalid_argument("Invalid coordinates");
     }
-    field[x][y] = cell;
+    field[x][y] = std::move(cell);
 }
 
 Cell* Field::get_cell(int x, int y) {
     if (x < 0 || x >= xSize || y < 0 || y >= ySize) {
         throw std::invalid_argument("Invalid coordinates");
     }
-    return field[x][y];
+    return field[x][y].get();
 }
 
 
@@ -91,7 +103,7 @@ void Field::update() {
         for (int y = 0; y < ySize; y++) {
             std::string type = field[x][y]->get_type();
             if (type == "Water") {
-                WaterCell* cell = dynamic_cast<WaterCell*>(field[x][y]);
+                WaterCell* cell = dynamic_cast<WaterCell*>(field[x][y].get());
                 float u = cell->get_u();
                 float v = cell->get_v();
                 if (u > 0 && v == 0) {
@@ -186,7 +198,7 @@ void Field::update() {
             }
 
             if (type == "MovingWall") {
-                MovingWallCell* cell = dynamic_cast<MovingWallCell*>(field[x][y]);
+                MovingWallCell* cell = dynamic_cast<MovingWallCell*>(field[x][y].get());
                 float u = cell->get_u();
                 float v = cell->get_v();
                 if (u > 0 && v == 0) {
@@ -258,7 +270,7 @@ void Field::update() {
     for (int x = 0; x < xSize; x++) {
         for (int y = 0; y < ySize; y++) {
             if (field[x][y]->get_type() == "Water") {
-                WaterCell* cell = dynamic_cast<WaterCell*>(field[x][y]);
+                WaterCell* cell = dynamic_cast<WaterCell*>(field[x][y].get());
                 cell->set_u(changes[x][y][0]);
                 cell->set_v(changes[x][y][1]);
             }

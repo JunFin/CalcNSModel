@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+#include <memory>
 
 void initialize_field(Field* field);  // Вопрос, где реализовывать эту функцию: в main.cpp или в field.cpp?
 
@@ -30,9 +31,9 @@ void initialize_field(Field* field) {
                 throw std::runtime_error("Failed to read file: " + std::string(FileName) + " or file is wrong");
             }
             switch (c) {
-                case 's': field->set_cell(x, y, new StaticWallCell(x, y)); break;
-                case 'm': field->set_cell(x, y, new MovingWallCell(x, y, 1, 0)); break;
-                case 'w': field->set_cell(x, y, new WaterCell(x, y, 0, 0, 0));  break;
+                case 's': field->set_cell(x, y, std::make_unique<StaticWallCell>(x, y)); break;
+                case 'm': field->set_cell(x, y, std::make_unique<MovingWallCell>(x, y, 1, 0)); break;
+                case 'w': field->set_cell(x, y, std::make_unique<WaterCell>(x, y, 0, 0, 0));  break;
                 case '\n': x--; break;
                 default: throw std::runtime_error("Invalid character in file: " + std::string(FileName));
             }

@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <memory>
 
 
 WaterCell::WaterCell(int x, int y, float u, float v, float p):Cell(x, y) {
@@ -62,6 +63,10 @@ void WaterCell::set_p(float p) {
         throw std::invalid_argument("Invalid pressure");
     }
     this->p = p;
+}
+
+std::unique_ptr<Cell> WaterCell::copy() const {
+    return std::make_unique<WaterCell>(*this);
 }
 
 std::string WaterCell::get_description() const {

@@ -12,6 +12,7 @@ class WallCell: public Cell {
         WallCell(int x, int y); // constructor
         
         float operator[](char c) const; // sets the value of the velocity or pressure 
+
 };
 
 #endif //CALCNSMODEL_WALLCELL_H_

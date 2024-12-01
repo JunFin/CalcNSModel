@@ -4,6 +4,7 @@
 #include "wallCell.h"
 
 #include <string>
+#include <memory>
 
 class MovingWallCell: public WallCell {
     private:
@@ -23,6 +24,10 @@ class MovingWallCell: public WallCell {
         void set_v(float v); // sets the y velocity
 
         std::string get_description() const override;
+
+        std::unique_ptr<Cell> copy() const override;
+
+
 };
 
 #endif //CALCNSMODEL_MOVINGWALLCELL_H_

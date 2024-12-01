@@ -2,8 +2,8 @@
 #include "../Settings/params.h"
 
 #include <stdexcept>
-
 #include <iostream>
+#include <memory>
 
 
 MovingWallCell::MovingWallCell(int x, int y, float u, float v):WallCell(x, y) {
@@ -51,4 +51,8 @@ void MovingWallCell::set_v(float v) {
 
 std::string MovingWallCell::get_description() const {
     return "M";
+}
+
+std::unique_ptr<Cell> MovingWallCell::copy() const {
+    return std::make_unique<MovingWallCell>(*this);
 }

@@ -2,6 +2,7 @@
 #include "../Settings/params.h"
 
 #include <stdexcept>
+#include <memory>
 
 
 
@@ -46,4 +47,8 @@ std::string Cell::get_description_test() const {
 
 void Cell::set_type(std::string type) {
     this->type = type;
+}
+
+std::unique_ptr<Cell> Cell::copy() const {
+    return std::make_unique<Cell>(*this);
 }

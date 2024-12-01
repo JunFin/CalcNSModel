@@ -2,7 +2,7 @@
 #define CALCNSMODEL_CELL_H_
 
 #include <string>
-
+#include <memory>
 
 class Cell {
     private:
@@ -20,6 +20,8 @@ class Cell {
 
         virtual std::string get_description() const;  // returns the description of the cell
         std::string get_description_test() const;  // returns the description of the cell for test with full information
+        virtual std::unique_ptr<Cell> copy() const;  // returns a copy of the cell
+    
     protected:
         void set_type(std::string type);
 };
