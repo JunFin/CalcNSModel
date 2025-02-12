@@ -12,7 +12,7 @@ class StaticWallCell: public WallCell {
     public:
         StaticWallCell(int x, int y); // constructor
         std::unique_ptr<Cell> copy() const override;
-
+        std::string get_description() const override;
 };
 
 #endif //CALCNSMODEL_STATICWALLCELL_H_

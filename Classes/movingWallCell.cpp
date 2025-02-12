@@ -56,3 +56,4 @@ std::string MovingWallCell::get_description() const {
 std::unique_ptr<Cell> MovingWallCell::copy() const {
     return std::make_unique<MovingWallCell>(*this);
 }
+

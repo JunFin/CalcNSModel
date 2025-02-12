@@ -14,15 +14,17 @@
 #include <chrono>
 #include <memory>
 
-void initialize_field(Field* field);  // Вопрос, где реализовывать эту функцию: в main.cpp или в field.cpp?
+
+extern "C" {
+
 
 void initialize_field(Field* field) {
     std::ifstream file(FileName);
     if (!file.is_open()) {
         throw std::runtime_error("Failed to open file: " + std::string(FileName));
     }
-    for (int y = 0; y < GridSize; y++) {
-        for (int x = 0; x < GridSize; x++) {
+    for (int y = 0; y < YGridSize; y++) {
+        for (int x = 0; x < XGridSize; x++) {
             char c = file.get();
             if (file.eof()) {
                 break;
@@ -45,15 +47,15 @@ void initialize_field(Field* field) {
 int main() {
     try {
         std::cout << "Field creating" << std::endl;
-        Field field(GridSize, GridSize);
+        Field field(XGridSize, YGridSize);
         std::cout << "Field initializing" << std::endl;
         initialize_field(&field);
         std::cout << "Field displaying" << std::endl;
-        field.display();
+        field.display_without_walls();
         for (int t = 0; t < TimeOfSimulation; t++) {
             std::cout << "\033[2J\033[1;1H";
             field.update();
-            field.display();
+            field.display_without_walls();
             std::this_thread::sleep_for(std::chrono::milliseconds(TimeStep));
         }
         return 0;
@@ -61,4 +63,5 @@ int main() {
         std::cerr << "Runtime error catched: " << e.what() << std::endl;
     }
     
+}
 }

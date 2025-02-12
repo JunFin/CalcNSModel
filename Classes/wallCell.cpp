@@ -4,6 +4,8 @@
 #include <stdexcept>
 
 
+
+
 WallCell::WallCell(int x, int y):Cell(x, y) {
     this->type = "NoneWall";
 }
@@ -16,3 +18,5 @@ float WallCell::operator[](char c) const {
 
     throw std::invalid_argument("Invalid parameter");
 }
+
+

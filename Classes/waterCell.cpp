@@ -87,3 +87,4 @@ std::string WaterCell::get_description() const {
     }
     return "?";
 }
+
