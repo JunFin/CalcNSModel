@@ -86,7 +86,6 @@ Cell* Field::get_cell(int x, int y) {
 
 
 
-
 extern "C" {
 
     Field* create_field(int xSize, int ySize) {
@@ -108,8 +107,9 @@ extern "C" {
         return field;
     }
 
-
-
+    Cell* get_cell(Field* field, int x, int y) {
+        return field->get_cell(x, y);
+    }
 
 
     void display(Field* field) {
@@ -330,9 +330,6 @@ extern "C" {
                 }
             }
         }
-
-
     }
-
 
 }

@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include <memory>
 
-extern "C" {
 
     Cell::Cell(int x, int y) {
         if (x < 0 || y < 0) {
@@ -53,4 +52,19 @@ extern "C" {
         return std::make_unique<Cell>(*this);
     }
 
+
+extern "C" {
+    
+    int get_x(Cell* cell) {
+        return cell->get_x();
+    }
+
+    int get_y(Cell* cell) {
+        return cell->get_y();
+    }
+
+    const char* get_type(Cell* cell) {
+        return cell->get_type().c_str();
+    }
+    
 }

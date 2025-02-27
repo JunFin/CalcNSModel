@@ -88,3 +88,18 @@ std::string WaterCell::get_description() const {
     return "?";
 }
 
+
+extern "C" {
+    
+    float get_u(WaterCell* cell) {
+        return cell->get_u();
+    }
+
+    float get_v(WaterCell* cell) {
+        return cell->get_v();
+    }
+
+    float get_p(WaterCell* cell) {
+        return cell->get_p();
+    }
+}
