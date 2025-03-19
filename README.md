@@ -1,17 +1,11 @@
 To build the project:
 ```bash
-make main
-```
-
-To rerebuild the project:
-```bash
-make clean
-make main
+make
 ```
 
 To run the project:
 ```bash
-./main
+python main.py
 ```
 
 To make tests:
